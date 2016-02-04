@@ -1,0 +1,24 @@
+{
+  "name": "yellow_yeti",
+  "version": "1.0.0",
+  "description": "School bandwidth simulator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/educationsuperhighway/yellow_yeti.git"
+  },
+  "author": "yellow_yeti@educationsuperhighway.org",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/educationsuperhighway/yellow_yeti/issues"
+  },
+  "homepage": "https://github.com/educationsuperhighway/yellow_yeti#readme",
+
+  "dependencies": {
+    "throttle-proxy": "0.6.0",
+    "express": "4.13.4"
+  }
+}
