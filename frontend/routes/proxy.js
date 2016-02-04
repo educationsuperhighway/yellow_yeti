@@ -2,6 +2,7 @@ var express = require('express'),
     http = require('http'),
     url = require('url'),
     path = require('path'),
+    trumpet = require('trumpet'),
     Throttle = require('throttle');
 
 var router = express.Router();
@@ -15,7 +16,15 @@ router.get('/', function(req, res, _next) {
     res.setHeader('x-throttle-proxy', 'skipped');
     res.setHeader('via', 'throttle-proxy');
     res.writeHead(proxyResponse.statusCode, proxyResponse.headers);
-    proxyResponse.pipe(throttle).pipe(res);
+
+    var tr = trumpet();
+    tr.selectAll('a', function (a) {
+      var href = url.resolve(req.query.url, a.getAttribute('href'));
+      var proxyUrl = 'http://localhost:3000/proxy?url=' + href;
+      a.setAttribute('href', proxyUrl);
+    });
+
+    proxyResponse.pipe(tr).pipe(throttle).pipe(res);
   });
 
   proxyRequest.on('error', function (err) {
