@@ -44,11 +44,15 @@ router.get('/', function(req, res) {
       "Content-Range": "bytes " + start + "-" + end + "/" + total,
       "Accept-Ranges": "bytes",
       "Content-Length": chunksize,
-      "Content-Type": "video/mp4"
+      "Content-Type": "video/mp4",
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      "Pragma": "no-cache",
+      "Expires": 0
     });
 
     var stream = fs.createReadStream(file, { start: start, end: end })
       .on("open", function() {
+        console.log('Serving video at ' + req.query.kbps + ' kbps');
         applyThrottle(stream, throttleRate, res);
       }).on("error", function(err) {
         res.end(err);

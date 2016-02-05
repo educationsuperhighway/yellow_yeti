@@ -10,9 +10,9 @@ block content
       .row.bandwidth-filter
         .col-md-2
         .col-md-4.filters 
-          select.form-control.state
+          select#state-dropdown.form-control.state
             option Select State 
-          select.form-control.district
+          select#district-dropdown.form-control.district
             option Select School District
           button.btn.btn-default#filter-play-button Play Now
             i.glyphicon.glyphicon-play.pull-left
@@ -33,10 +33,10 @@ block content
               td.speed 10 kbps/student 
         .col-md-2
       .row 
-        p.current-bandwidth-sentence Current bandwidth in [DISTRICT]: <span>150 kbps/student</span>
+        p.current-bandwidth-sentence Current bandwidth in <span id='district-name'></span>: <span><span id='district-bw'>150</span> kbps/student</span>
       .row.select-bandwidth-row.col-md-10.col-md-offset-2
-        video(width="800" height="420" controls)
-          source(src="/video?kbps=1000" type="video/mp4")
+        video#video-player(width="800" height="420" controls)
+          source.mp4(src="/video?kbps=1000" type="video/mp4")
 
         .current-video-speed-bar
           p.video-is-playing.col-md-8 This video is playing at <strong>xx kbps/student</strong>. 
