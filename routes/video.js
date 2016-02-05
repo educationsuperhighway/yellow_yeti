@@ -7,13 +7,33 @@ var fs = require("fs"),
 
 var router = express.Router();
 
+var kbsToBits = function(kbs) {
+  if(kbs) {
+    return kbs * 1000;
+  } else {
+    return Infinity;
+  }
+};
+
+var calculateThrottleRate = function(kbs) {
+  return kbsToBits(kbs);
+};
+
+var applyThrottle = function(stream, throttleRate, response) {
+  if(throttleRate === Infinity) {
+    stream.pipe(response);
+  } else {
+    stream.pipe(new Throttle(throttleRate)).pipe(response);
+  }
+};
+
 router.get('/', function(req, res) {
   var filename = 'Holy_meatballs-LearningScienceInAVirtualWorld210.mov',
       file = path.resolve(__dirname, "../public/videos/", filename),
       range = req.headers.range,
       positions = range.replace(/bytes=/, "").split("-"),
       start = parseInt(positions[0], 10),
-      throttle = new Throttle(100000);
+      throttleRate = calculateThrottleRate(req.query.kbps);
 
   fs.stat(file, function(err, stats) {
     var total = stats.size;
@@ -29,8 +49,7 @@ router.get('/', function(req, res) {
 
     var stream = fs.createReadStream(file, { start: start, end: end })
       .on("open", function() {
-        stream.pipe(throttle).pipe(res);
-        //stream.pipe(res);
+        applyThrottle(stream, throttleRate, res);
       }).on("error", function(err) {
         res.end(err);
       });
