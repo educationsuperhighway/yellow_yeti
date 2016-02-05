@@ -1,6 +1,8 @@
+@font-face { font-family: "Museo-Slab"; src: url('/fonts/Museo_Slab_500_2.otf'); }
+
 body {
   padding-top: 100px;
-  font: 14px "Lato", Helvetica, Arial, sans-serif !important;
+  font: 14px "Museo-Slab", "Lato", Helvetica, Arial, sans-serif !important;
 }
 
 a {
@@ -99,6 +101,7 @@ dl.bandwidth-bar-chart {
 
 .bandwidth-20:after {
   width: 20%;
+  content: ""
 }
 .bandwidth-30:after {
   width: 30%;
