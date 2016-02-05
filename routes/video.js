@@ -28,7 +28,7 @@ var applyThrottle = function(stream, throttleRate, response) {
 };
 
 router.get('/', function(req, res) {
-  var filename = 'Holy_meatballs-LearningScienceInAVirtualWorld210.mov',
+  var filename = '20secs.mov',
       file = path.resolve(__dirname, "../public/videos/", filename),
       range = req.headers.range,
       positions = range.replace(/bytes=/, "").split("-"),
