@@ -55,7 +55,7 @@ $(function() {
     var bw = Math.floor(districtDropdown.val()),
         name = selectedDistrict().text();
         numStudents = districtDropdown.find('option')[1].id
-        lostTime = Math.floor((48 * numStudents * 180) / 3600)
+        lostTime = Math.floor(((48-20) * numStudents * 180) / 3600)
 
     $('.district-bw').text(bw);
     $('#district-name').text(name);
