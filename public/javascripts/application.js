@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   var playVideoFromFilter = $('#filter-play-button');
   var videoRow = $('#video-row');
-  var video = $('#video')
+  var video = $('#video-player')
   var experienceOtherSpeedsDropdown = $('.experience-other-dropdown')
   var experienceOtherSpeeds = $('.experience-other-speeds')
   var playVideoFromOverlay = $('#video-play-button')
