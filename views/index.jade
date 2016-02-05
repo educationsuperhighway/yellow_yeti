@@ -3,9 +3,9 @@ extends layout
 block content
   .container-fluid.container-flex
     .row.intro-heading
-      h3.heading High-speed connectivity is important for education. 
-      p Why does this matter?
-      p Experience what this feels like.
+      h3.heading Slow bandwidth impacts digital learning in the classroom.
+      p Our children are trying to learn skills for tomorrow with dial-up speeds of the past.
+      p Experience what it feels like.
     .row.video-row
       .row.bandwidth-filter
         .col-md-2
@@ -42,6 +42,9 @@ block content
               span.glyphicon.glyphicon-chevron-down.down-arrow
           video#video-player(width="800" height="420")
             source.mp4(src="" type="video/mp4")
+          .time-spent-playing
+            p Time spent playing this 20 second video:
+            p.timer
           .experience-other-speeds 
             p.description To see how a student might experience bandwidth differently, explore by clicking on the various tiers of bandwidth availability
             dl.bandwidth-bar-chart

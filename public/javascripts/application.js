@@ -54,4 +54,16 @@ $(document).ready(function() {
 
   }
 
+  video.on('loadstart', function(e){
+    //set timeout and take the difference of load start and current time once a second and send to a timer
+    console.log(event)
+    var loadTime = new Date().getTime();
+    var elapsedTime = 0;
+
+    setTimeout(function(){
+      elapsedTime = (new Date().getTime()) - loadTime;
+    }, 1000);
+
+    console.log(elapsedTime)
+  })
 });
