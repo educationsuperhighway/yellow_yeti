@@ -13,10 +13,6 @@ router.get('/', function(req, res, _next) {
   var throttle = new Throttle(50000);
 
   proxyRequest.on('response', function (proxyResponse) {
-    res.setHeader('x-throttle-proxy', 'skipped');
-    res.setHeader('via', 'throttle-proxy');
-    res.writeHead(proxyResponse.statusCode, proxyResponse.headers);
-
     var tr = trumpet();
     tr.selectAll('a', function (a) {
       var href = url.resolve(req.query.url, a.getAttribute('href'));
