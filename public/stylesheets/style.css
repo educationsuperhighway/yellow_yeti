@@ -17,11 +17,6 @@ a {
   height: 50px;
 }
 
-iframe {
-  width: 500px;
-  height: 500px;
-}
-
 .container-flex {
   display: flex;
   justify-content: center;
@@ -46,6 +41,31 @@ iframe {
   width: 800px;
   height: 410px;
 }
+
+.kill-screen {
+  /*display: none;*/
+  display: block;
+  font-family: "Lato" !important;
+  font-size: 28px;
+  background-color: #484848;
+  color: white;
+  opacity: 0.95;
+  width: 800px;
+  height: 410px;
+  padding: 55px;
+  text-align: center;
+}
+
+.time-spent{
+  text-align: center;
+  font-size: 34px;
+}
+.calculated-lost-time{
+  text-align: center;
+  font-size: 34px;
+}
+
+.number-hours { padding-top: 80px; }
 
 .video-is-playing {
   padding-top: 5px;
@@ -227,7 +247,6 @@ border-radius: 5px;*/
 }
 
 video {
-  position: relative;
 }
 
 .time-spent-playing {

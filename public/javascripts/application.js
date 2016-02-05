@@ -9,7 +9,8 @@ $(document).ready(function() {
   var selectStateAndDistrict = $('select.state, select.district');
   var learnMoreRow = $('.learn-more-row');
   var timerText = $('p.timer');
-  var timerOverlay = $('.time-spent-playing')
+  var timerOverlay = $('.time-spent-playing');
+  var killScreen = $('.kill-screen');
 
   playVideoFromFilter.on('click', function(){
     videoLoader.reload();
@@ -45,15 +46,16 @@ $(document).ready(function() {
     if (video.is(':visible')) {
       video.get(0).pause();
       video.css('display', 'none');
+      timerOverlay.hide();
       experienceOtherSpeeds.css('display', 'block');
     }
     else {
       videoRow.css('display', 'block');
       video.css('display', 'block');
       video.get(0).play();
+      timerOverlay.show();
       experienceOtherSpeeds.css('display', 'none');
     }
-
   }
 
   var elapsedTime = 0;
@@ -68,6 +70,9 @@ $(document).ready(function() {
 
   video.on('ended', function(){
     clearInterval(timer)
+    video.hide();
+    timerOverlay.hide();
+    killScreen.show();
   })
 
   var setElapsedTime = function(loadTime) {
