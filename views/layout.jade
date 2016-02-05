@@ -3,5 +3,12 @@ html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
   body
+    div#header
+      nav.navbar.navbar-default.esh-navbar.navbar-fixed-top
+        .container#header-container
+          .navbar-header
+            a(href='www.educationsuperhighway.org')
+              img#esh-logo(src='images/logo.png')
     block content
