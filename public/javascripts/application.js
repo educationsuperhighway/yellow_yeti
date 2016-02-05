@@ -60,6 +60,7 @@ $(document).ready(function() {
 
   var elapsedTime = 0;
   var timer;
+  var stopTime;
   video.on('loadstart', function(e){
     if (!this.currentSrc){
       return
@@ -73,6 +74,11 @@ $(document).ready(function() {
     video.hide();
     timerOverlay.hide();
     killScreen.show();
+    splitTime = $('.timer').text().split(":")
+    minutes = parseInt(splitTime[0])
+    seconds = parseInt(splitTime[1])
+    stopTime = (minutes * 60) + seconds
+    $('.time-spent').text(stopTime + " seconds")
   })
 
   var setElapsedTime = function(loadTime) {

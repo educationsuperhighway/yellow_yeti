@@ -43,8 +43,8 @@ a {
 }
 
 .kill-screen {
-  /*display: none;*/
-  display: block;
+  display: none;
+  /*display: block;*/
   font-family: "Lato" !important;
   font-size: 28px;
   background-color: #484848;
@@ -58,14 +58,14 @@ a {
 
 .time-spent{
   text-align: center;
-  font-size: 34px;
+  font-size: 48px;
 }
 .calculated-lost-time{
   text-align: center;
-  font-size: 34px;
+  font-size: 48px;
 }
 
-.number-hours { padding-top: 80px; }
+.number-hours { padding-top: 75px; }
 
 .video-is-playing {
   padding-top: 5px;
