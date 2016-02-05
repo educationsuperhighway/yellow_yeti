@@ -37,6 +37,7 @@ iframe {
 }
 
 .experience-other-speeds {
+  display: none;
   background-color: #484848;
   opacity: 0.95;
   width: 800px;
@@ -115,6 +116,11 @@ dl.bandwidth-bar-chart {
   width: 5%;
 }
 
+.down-arrow {
+  margin: 5px;
+  cursor: pointer;
+}
+
 #video-play-button {
   width: 195px;
   padding: 10px;
@@ -127,9 +133,17 @@ dl.bandwidth-bar-chart {
   border-radius: 5px;
 }
 
-.down-arrow {
-  margin: 5px;
-  cursor: pointer;
+.inactive-play-button {
+  background: #EAE8EA !important;
+  border: 1px solid #4A4A4A !important;
+  border-radius: 5px !important;
+  cursor: default !important;
+  pointer-events: none;
+}
+.active-play-button {
+  background: #FFFFFF !important;
+  border: 1px solid #009291 !important;
+  color: #009291 !important;
 }
 
 #filter-play-button {
@@ -138,9 +152,6 @@ dl.bandwidth-bar-chart {
   text-transform: uppercase;
   font-size: 14px;
   margin-top: 20px;
-  background: #EAE8EA;
-  border: 1px solid #4A4A4A;
-  border-radius: 5px;
 }
 /*yellow: #FDB913*/
 /*green: #009296 */
@@ -182,10 +193,30 @@ border-radius: 5px;*/
   margin: 20px;
   border: 1px solid #FF9400;
   border-radius: 4px;
+  margin-left: 205px;
 }
 
-.select-bandwidth-row {
+.toggle-video { display: none; }
+.watch-video-row {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
+}
+
+.learn-more-row {
+  display: none;
+  background-color: #9B9B9B;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 16px;
+  color: white;
+  height: 50px;
+}
+
+.learn-more-expand {
+  padding: 15px;
+}
+
+.learn-more-arrow {
+  padding: 5px;
 }
