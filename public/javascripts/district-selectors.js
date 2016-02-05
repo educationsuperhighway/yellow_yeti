@@ -55,7 +55,7 @@ $(function() {
     var bw = Math.floor(districtDropdown.val()),
         name = selectedDistrict().text();
 
-    $('#district-bw').text(bw);
+    $('.district-bw').text(bw);
     $('#district-name').text(name);
 
     $("#video-player source.mp4").attr('src', '/video?kbps=' + bw);

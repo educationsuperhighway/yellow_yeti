@@ -16,34 +16,35 @@ block content
             option(value="" selected disabled) Select School District
           button.btn.btn-default.inactive-play-button#filter-play-button Play Now
             i.glyphicon.glyphicon-play.pull-left
-        .col-md-4.district-list
-          p Example Districts in [STATE]
-          table.table
-            tr 
-              th.district-name DISTRICT NAME
-              th.speed IA BANDWIDTH PER STUDENT 
-            tr
-              td.district-name ABC District 
-              td.speed 100 kbps/student 
-            tr 
-              td.district-name LA School District
-              td.speed 1 Mbps/student 
-            tr 
-              td.district-name Oakland Schools  
-              td.speed 10 kbps/student 
+        //- List of nearby districts and bandwidths
+        //- .col-md-4.district-list
+        //-   p Example Districts in [STATE]
+        //-   table.table
+        //-     tr 
+        //-       th.district-name DISTRICT NAME
+        //-       th.speed IA BANDWIDTH PER STUDENT 
+        //-     tr
+        //-       td.district-name ABC District 
+        //-       td.speed 100 kbps/student 
+        //-     tr 
+        //-       td.district-name LA School District
+        //-       td.speed 1 Mbps/student 
+        //-     tr 
+        //-       td.district-name Oakland Schools  
+        //-       td.speed 10 kbps/student 
         .col-md-2
-      .row 
-        p.current-bandwidth-sentence Current bandwidth in <span id='district-name'></span>: <span><span id='district-bw'>150</span> kbps/student</span>
+      .row
+        p.current-bandwidth-sentence Current bandwidth in <span id='district-name'></span>: <span><span class='district-bw'></span> kbps/student</span>
       .row.toggle-video#video-row
         .watch-video-row.col-md-10.col-md-offset-2
           .current-video-speed-bar
-            p.video-is-playing.col-md-8 This video is playing at <strong>xx kbps/student</strong>. 
+            p.video-is-playing.col-md-8 This video is playing at <strong><span class='district-bw'></span> kbps/student</strong>. 
             p.experience-other-dropdown.col-md-4 Experience other speeds
               span.glyphicon.glyphicon-chevron-down.down-arrow
           video#video-player(width="800" height="420")
             source.mp4(src="" type="video/mp4")
           .time-spent-playing
-            p Time spent playing this 20 second video:
+            p.time-spent-sentence Time spent playing<br>this 20 second video:
             p.timer
           .experience-other-speeds 
             p.description To see how a student might experience bandwidth differently, explore by clicking on the various tiers of bandwidth availability

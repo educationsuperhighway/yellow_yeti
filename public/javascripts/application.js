@@ -3,11 +3,13 @@ $(document).ready(function() {
   var playVideoFromFilter = $('#filter-play-button');
   var videoRow = $('#video-row');
   var video = $('#video-player');
-  var experienceOtherSpeedsDropdown = $('.experience-other-dropdown')
-  var experienceOtherSpeeds = $('.experience-other-speeds')
-  var playVideoFromOverlay = $('#video-play-button')
-  var selectStateAndDistrict = $('select.state, select.district')
-  var learnMoreRow = $('.learn-more-row')
+  var experienceOtherSpeedsDropdown = $('.experience-other-dropdown');
+  var experienceOtherSpeeds = $('.experience-other-speeds');
+  var playVideoFromOverlay = $('#video-play-button');
+  var selectStateAndDistrict = $('select.state, select.district');
+  var learnMoreRow = $('.learn-more-row');
+  var timerText = $('p.timer');
+  var timerOverlay = $('.time-spent-playing')
 
   playVideoFromFilter.on('click', function(){
     videoLoader.reload();
@@ -54,16 +56,30 @@ $(document).ready(function() {
 
   }
 
+  var elapsedTime = 0;
+  var timer;
   video.on('loadstart', function(e){
-    //set timeout and take the difference of load start and current time once a second and send to a timer
-    console.log(event)
+    if (!this.currentSrc){
+      return
+    }
     var loadTime = new Date().getTime();
-    var elapsedTime = 0;
-
-    setTimeout(function(){
-      elapsedTime = (new Date().getTime()) - loadTime;
-    }, 1000);
-
-    console.log(elapsedTime)
+    timer = setElapsedTime(loadTime);
   })
+
+  video.on('ended', function(){
+    clearInterval(timer)
+  })
+
+  var setElapsedTime = function(loadTime) {
+    return setInterval(function(){
+      elapsedTime = (new Date().getTime()) - loadTime;
+      setTimerText(elapsedTime);
+    }, 10);
+  };
+
+  var setTimerText = function(elapsedTime){
+    var time = moment.utc(elapsedTime).format("mm:ss:SS")
+    timerText.text(time)
+  };
+
 });
