@@ -11,10 +11,10 @@ block content
         .col-md-2
         .col-md-4.filters 
           select#state-dropdown.form-control.state
-            option Select State 
+            option(value="" selected disabled) Select State 
           select#district-dropdown.form-control.district
-            option Select School District
-          button.btn.btn-default#filter-play-button Play Now
+            option(value="" selected disabled) Select School District
+          button.btn.btn-default.inactive-play-button#filter-play-button Play Now
             i.glyphicon.glyphicon-play.pull-left
         .col-md-4.district-list
           p Example Districts in [STATE]
@@ -34,23 +34,26 @@ block content
         .col-md-2
       .row 
         p.current-bandwidth-sentence Current bandwidth in <span id='district-name'></span>: <span><span id='district-bw'>150</span> kbps/student</span>
-      .row.select-bandwidth-row.col-md-10.col-md-offset-2
-        video#video-player(width="800" height="420" controls)
-          source.mp4(src="/video?kbps=1000" type="video/mp4")
-
-        .current-video-speed-bar
-          p.video-is-playing.col-md-8 This video is playing at <strong>xx kbps/student</strong>. 
-          p.experience-other-dropdown.col-md-4 Experience other speeds
-            span.glyphicon.glyphicon-chevron-down.down-arrow
-        .experience-other-speeds 
-          p.description To see how a student might experience bandwidth differently, explore by clicking on the various tiers of bandwidth availability
-          dl.bandwidth-bar-chart
-            dd.bandwidth.bandwidth-50
-            dd.bandwidth.bandwidth-40
-            dd.bandwidth.bandwidth-30
-            dd.bandwidth.bandwidth-20
-            dd.bandwidth.bandwidth-10
-          button.btn.btn-default#video-play-button Play Now
-            i.glyphicon.glyphicon-play.pull-left
+      .row.toggle-video#video-row
+        .watch-video-row.col-md-10.col-md-offset-2
+          .current-video-speed-bar
+            p.video-is-playing.col-md-8 This video is playing at <strong>xx kbps/student</strong>. 
+            p.experience-other-dropdown.col-md-4 Experience other speeds
+              span.glyphicon.glyphicon-chevron-down.down-arrow
+          video#video-player(width="800" height="420" controls)
+            source.mp4(src="/video?kbps=1000" type="video/mp4")
+          .experience-other-speeds 
+            p.description To see how a student might experience bandwidth differently, explore by clicking on the various tiers of bandwidth availability
+            dl.bandwidth-bar-chart
+              dd.bandwidth.bandwidth-50
+              dd.bandwidth.bandwidth-40
+              dd.bandwidth.bandwidth-30
+              dd.bandwidth.bandwidth-20
+              dd.bandwidth.bandwidth-10
+            button.btn.btn-default#video-play-button Play Now
+              i.glyphicon.glyphicon-play.pull-left
         .compare-connect-row
           button.btn.btn-default.compare-connect-btn Compare &amp; Connect K-12
+    .row.learn-more-row
+      p.learn-more-expand Learn More
+        span.glyphicon.glyphicon-chevron-down.learn-more-arrow
