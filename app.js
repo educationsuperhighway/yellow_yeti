@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var httpProxy = require('http-proxy');
 
 var routes = require('./routes/index');
 var proxy = require('./routes/proxy');
@@ -54,13 +53,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-httpProxy.createServer({
-  target: {
-    host: 'localhost',
-    port: 9999
-  }
-}).listen(7999);
-
 
 module.exports = app;

@@ -18,14 +18,14 @@
   "homepage": "https://github.com/educationsuperhighway/yellow_yeti#readme",
 
   "dependencies": {
-    "throttle-proxy": "0.6.0",
     "express": "4.13.4",
-    "http-proxy": "~1.13.1",
     "body-parser": "~1.13.2",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
+    "trumpet": "1.7.2",
+    "throttle": "1.0.3",
     "serve-favicon": "~2.3.0"
   }
 }
