@@ -56,18 +56,19 @@ $(document).ready(function() {
       timerOverlay.show();
       experienceOtherSpeeds.css('display', 'none');
     }
-  }
+  };
 
   var elapsedTime = 0;
   var timer;
   var stopTime;
+
   video.on('loadstart', function(e){
     if (!this.currentSrc){
       return
     }
     var loadTime = new Date().getTime();
     timer = setElapsedTime(loadTime);
-  })
+  });
 
   video.on('ended', function(){
     clearInterval(timer)
@@ -79,7 +80,7 @@ $(document).ready(function() {
     seconds = parseInt(splitTime[1])
     stopTime = (minutes * 60) + seconds
     $('.time-spent').text(stopTime + " seconds")
-  })
+  });
 
   var setElapsedTime = function(loadTime) {
     return setInterval(function(){
