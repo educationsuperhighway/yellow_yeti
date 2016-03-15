@@ -90,7 +90,7 @@ $(document).ready(function() {
   };
 
   var setTimerText = function(elapsedTime){
-    var time = moment.utc(elapsedTime).format("mm:ss:SS")
+    var time = moment.utc(elapsedTime).format("mm:ss:SS");
     timerText.text(time)
   };
 

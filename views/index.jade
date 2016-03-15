@@ -9,13 +9,7 @@ block content
     .row.video-row
       .row.bandwidth-filter
         .col-md-2
-        .col-md-4.filters 
-          select#state-dropdown.form-control.state
-            option(value="" selected disabled) Select State 
-          select#district-dropdown.form-control.district
-            option(value="" selected disabled) Select School District
-          button.btn.btn-default.inactive-play-button#filter-play-button Play Now
-            i.glyphicon.glyphicon-play.pull-left
+        .col-md-4.filters#select-bandwidth
         .col-md-2
       .row
         p.current-bandwidth-sentence Current bandwidth in <span id='district-name'></span>: <span><span class='district-bw'></span> kbps/student</span>
@@ -30,7 +24,7 @@ block content
           .time-spent-playing
             p.time-spent-sentence Time spent playing<br>this 20 second video:
             p.timer
-          .experience-other-speeds 
+          .experience-other-speeds
             p.description To see how a student might experience bandwidth differently, explore by clicking on the various tiers of bandwidth availability
             dl.bandwidth-bar-chart
               dd.bandwidth.bandwidth-50

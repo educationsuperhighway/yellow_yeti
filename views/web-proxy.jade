@@ -1,16 +1,16 @@
 extends layout
 
 block content
-    iframe(id="proxy-window" src="")
+  iframe(id="proxy-window" src="")
 
-    script(type='text/javascript').
-        var input = document.getElementById('proxy-url');
-        var iframe = document.getElementById('proxy-window');
+  script(type='text/javascript').
+    var input = document.getElementById('proxy-url');
+    var iframe = document.getElementById('proxy-window');
 
-        var proxyUrl = function (url) {
-            return "http://localhost:3000/proxy?url=" + url;
-        };
+    var proxyUrl = function (url) {
+      return "http://localhost:3000/proxy?url=" + url;
+    };
 
-        input.addEventListener('change', function () {
-            iframe.setAttribute("src", proxyUrl(input.value));
-        });
+    input.addEventListener('change', function () {
+      iframe.setAttribute("src", proxyUrl(input.value));
+    });
