@@ -71,7 +71,7 @@ $(document).ready(function() {
   });
 
   video.on('ended', function(){
-    clearInterval(timer)
+    clearInterval(timer);
     video.hide();
     timerOverlay.hide();
     killScreen.show();
