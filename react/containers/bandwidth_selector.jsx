@@ -18,7 +18,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onPlay: (bandwidth) => {
       dispatch(setVideoSource(bandwidth));
       dispatch(playVideo());
-      dispatch(initializeTimer());
+      dispatch(initializeTimer(100));
     }
   }
 };

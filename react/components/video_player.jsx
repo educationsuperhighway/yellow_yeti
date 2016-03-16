@@ -17,22 +17,20 @@ class VideoPlayer extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="watch-video-row col-md-10 col-md-offset-2">
-          <div className="current-video-speed-bar">
-            <p className="video-is-playing col-md-8">
-              This video is playing at <strong>
-              <span className='district-bw'>{this.props.speed}</span>
-              kbps/student</strong>
-            </p>
-          </div>
-          <video id="video-player"
-                 preload="auto"
-                 width="800"
-                 height="420">
-            <source className="mp4" type="video/mp4" src={this.props.src}/>
-          </video>
+      <div className="watch-video-row col-md-10 col-md-offset-2">
+        <div className="current-video-speed-bar">
+          <p className="video-is-playing col-md-8">
+            This video is playing at <strong>
+            <span className='district-bw'>{this.props.speed}</span>
+            kbps/student</strong>
+          </p>
         </div>
+        <video id="video-player"
+               preload="auto"
+               width="800"
+               height="420">
+          <source className="mp4" type="video/mp4" src={this.props.src}/>
+        </video>
         <VideoTimer />
       </div>
     )
