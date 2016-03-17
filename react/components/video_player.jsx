@@ -6,18 +6,50 @@ class VideoPlayer extends Component {
     src:   PropTypes.string,
     speed: PropTypes.number,
     onMounted: PropTypes.func,
-    onPlayEnd: PropTypes.func
+    videoEvents: PropTypes.object
   };
+
+  static defaultProps = {
+    videoEvents: {
+      ended: (() => {}),
+      loadstart: (() => {}),
+      loadeddata: (() => {}),
+      loadedmetadata: (() => {}),
+      canplay: (() => {}),
+      play: (() => {}),
+      playing: (() => {}),
+      progress: (() => {}),
+      stalled: (() => {}),
+      suspend: (() => {}),
+      waiting: (() => {})
+    }
+  };
+
+  registerListeners(video) {
+    let listeners = this.props.videoEvents;
+
+    video.addEventListener('ended', listeners.ended);
+    video.addEventListener('loadstart', listeners.loadstart);
+    video.addEventListener('loadeddata', listeners.loadeddata);
+    video.addEventListener('loadedmetadata', listeners.loadedmetadata);
+    video.addEventListener('canplay', listeners.canplay);
+    video.addEventListener('play', listeners.play);
+    video.addEventListener('playing', listeners.playing);
+    video.addEventListener('progress', listeners.progress);
+    video.addEventListener('stalled', listeners.stalled);
+    video.addEventListener('suspend', listeners.suspend);
+    video.addEventListener('waiting', listeners.waiting);
+  }
 
   componentDidMount() {
     let video = document.getElementById('video-player');
     this.props.onMounted(video);
-    video.addEventListener('ended', this.props.onPlayEnd);
+    this.registerListeners(video);
   }
 
   render() {
     return (
-      <div className="watch-video-row col-md-10 col-md-offset-2">
+      <div className="video-row watch-video-row col-md-10 col-md-offset-2">
         <div className="current-video-speed-bar">
           <p className="video-is-playing col-md-8">
             This video is playing at <strong>
@@ -26,7 +58,6 @@ class VideoPlayer extends Component {
           </p>
         </div>
         <video id="video-player"
-               preload="auto"
                width="800"
                height="420">
           <source className="mp4" type="video/mp4" src={this.props.src}/>

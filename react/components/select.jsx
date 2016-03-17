@@ -14,18 +14,18 @@ class Select extends Component {
   onSubmit(e) {
     e.preventDefault();
     let form = e.target;
-    console.log(form.bandwidth.value);
     this.props.onPlay(form.bandwidth.value);
   }
 
   render() {
     return (
-      <div className="col-md-4 filters">
+      <div className="col-xs-4 filters">
         <form onSubmit={this.onSubmit.bind(this)}>
           <select name="bandwidth" onChange={this.props.onChange}
                   id="bandwidth-dropdown"
                   className="form-control state"
           >
+            <option>Select Bandwidth</option>
             {this.props.options.map(option =>
               <Option key={option.value}
                       value={option.value}

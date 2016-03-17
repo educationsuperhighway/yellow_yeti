@@ -44,7 +44,6 @@ a {
 
 .kill-screen {
   display: none;
-  /*display: block;*/
   font-family: "Lato" !important;
   font-size: 28px;
   background-color: #484848;

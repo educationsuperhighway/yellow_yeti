@@ -19,7 +19,7 @@ function bandwidthApp(state = {}, action) {
 const logger = createLogger();
 const dataStore = createStore(
   bandwidthApp,
-  applyMiddleware(thunk, promise, logger)
+  applyMiddleware(thunk, promise)
 );
 
 export default dataStore;

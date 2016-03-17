@@ -1,6 +1,6 @@
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './components/app.jsx';
+import WiredApp from './containers/app.jsx';
 import dataStore from './data_store.js';
 
 $(() => {
@@ -10,7 +10,7 @@ $(() => {
   }
   render(
     <Provider store={dataStore}>
-      <App />
+      <WiredApp />
     </Provider>, node
   );
 });

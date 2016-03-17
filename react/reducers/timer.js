@@ -1,5 +1,9 @@
 import { START_TIMER, UPDATE_TIMER, STOP_TIMER } from '../actions/timer.js';
 
+export const timerDefaults = {
+  running: false
+};
+
 export function timer(state, action) {
   function getTime() {
     return new Date().getTime();
@@ -26,6 +30,6 @@ export function timer(state, action) {
       });
 
     default:
-      return Object.assign({}, state);
+      return Object.assign({}, state, timerDefaults);
   }
 }
