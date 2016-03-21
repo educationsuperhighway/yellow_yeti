@@ -21244,9 +21244,16 @@
 	  }, {
 	    key: 'bandwidthFilter',
 	    value: function bandwidthFilter() {
-	      return (0, _classnames2.default)("bandwidth-filter", "row", {
-	        hidden: this.props.view != 'BANDWIDTH_SELECTOR'
-	      });
+	      if (this.props.view != 'BANDWIDTH_SELECTOR') {
+	        return _react2.default.createElement('div', null);
+	      }
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'bandwidth-filter row' },
+	        _react2.default.createElement('div', { className: 'col-md-2' }),
+	        _react2.default.createElement(_bandwidth_selector2.default, null),
+	        _react2.default.createElement('div', { className: 'col-md-2' })
+	      );
 	    }
 	  }, {
 	    key: 'bandwidthSentence',
@@ -21263,7 +21270,7 @@
 	  }, {
 	    key: 'killScreen',
 	    value: function killScreen() {
-	      return (0, _classnames2.default)("row", {
+	      return (0, _classnames2.default)("row", 'col-md-8', 'col-md-offset-2', {
 	        hidden: this.props.view != 'KILL_SCREEN'
 	      });
 	    }
@@ -21295,18 +21302,7 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'row video-row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: this.bandwidthFilter() },
-	            _react2.default.createElement('div', { className: 'col-xs-2' }),
-	            _react2.default.createElement(_bandwidth_selector2.default, null),
-	            _react2.default.createElement('div', { className: 'col-xs-2' })
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: this.bandwidthSentence() },
-	            _react2.default.createElement(_bandwidth_sentence2.default, null)
-	          ),
+	          this.bandwidthFilter(),
 	          _react2.default.createElement(
 	            'div',
 	            { className: this.videoPlayer(), id: 'video-row' },
@@ -35784,7 +35780,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'col-xs-4 filters' },
+	        { className: 'col-md-4 filters' },
 	        _react2.default.createElement(
 	          'form',
 	          { onSubmit: this.onSubmit.bind(this) },
@@ -36114,7 +36110,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'watch-video-row col-md-10 col-md-offset-2' },
+	        { className: 'watch-video-row col-md-8 col-md-offset-2' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'current-video-speed-bar' },
@@ -36139,30 +36135,6 @@
 	            width: '800',
 	            height: '420' },
 	          _react2.default.createElement('source', { className: 'mp4', type: 'video/mp4', src: this.props.src })
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'experience-other-speeds' },
-	          _react2.default.createElement(
-	            'p',
-	            { className: 'description' },
-	            'To see how a student might experience bandwidth differently, explore by clicking on the various tiers of bandwidth availability'
-	          ),
-	          _react2.default.createElement(
-	            'dl',
-	            { className: 'bandwidth-bar-chart' },
-	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-50' }),
-	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-40' }),
-	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-30' }),
-	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-20' }),
-	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-10' })
-	          ),
-	          _react2.default.createElement(
-	            'button',
-	            { id: 'video-play-button', className: 'btn btn-default' },
-	            'Play Now',
-	            _react2.default.createElement('i', { className: 'glyphicon glyphicon-play pull-left' })
-	          )
 	        ),
 	        _react2.default.createElement(_video_timer2.default, null)
 	      );

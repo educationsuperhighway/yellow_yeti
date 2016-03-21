@@ -19,7 +19,7 @@ class Select extends Component {
 
   render() {
     return (
-      <div className="col-xs-4 filters">
+      <div className="col-md-4 filters">
         <form onSubmit={this.onSubmit.bind(this)}>
           <select name="bandwidth" onChange={this.props.onChange}
                   id="bandwidth-dropdown"

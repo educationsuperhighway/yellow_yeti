@@ -30,9 +30,16 @@ class App extends Component {
   }
 
   bandwidthFilter() {
-    return classNames("bandwidth-filter", "row", {
-      hidden: this.props.view != 'BANDWIDTH_SELECTOR'
-    });
+    if(this.props.view != 'BANDWIDTH_SELECTOR') {
+      return (<div></div>)
+    }
+    return (
+      <div className='bandwidth-filter row'>
+        <div className="col-md-2"></div>
+        <SelectBandwidth />
+        <div className="col-md-2"></div>
+      </div>
+    )
   }
 
   bandwidthSentence() {
@@ -46,10 +53,12 @@ class App extends Component {
   }
 
   killScreen() {
-    return classNames("row", {
+    return classNames("row", 'col-md-8', 'col-md-offset-2', {
       hidden: this.props.view != 'KILL_SCREEN'
     });
   }
+
+
 
   render() {
     return (
@@ -67,14 +76,7 @@ class App extends Component {
           </p>
         </div>
         <div className="row video-row">
-          <div className={this.bandwidthFilter()}>
-            <div className="col-xs-2"></div>
-            <SelectBandwidth />
-            <div className="col-xs-2"></div>
-          </div>
-          <div className={this.bandwidthSentence()}>
-            <BandwidthSentence />
-          </div>
+          {this.bandwidthFilter()}
           <div className={this.videoPlayer()} id="video-row">
             <ActiveVideoPlayer />
           </div>

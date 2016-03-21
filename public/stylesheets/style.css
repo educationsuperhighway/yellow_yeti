@@ -11,13 +11,16 @@ a {
 }
 
 #esh-logo {
-  margin: 20px 0px 20px 30px;
+  margin: 20px 0 20px 30px;
   max-width: 100%;
   display: block;
   height: 50px;
 }
 
 .container-flex {
+  display: flex;
+  justify-content: center;
+  flex-flow: column nowrap;
 }
 
 .intro-heading {
@@ -29,10 +32,10 @@ a {
 
 .bandwidth-filter {
   padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .experience-other-speeds {
-  display: none;
   background-color: #484848;
   opacity: 0.95;
   width: 800px;
@@ -40,6 +43,7 @@ a {
 }
 
 .kill-screen {
+  /*display: block;*/
   font-family: "Lato" !important;
   font-size: 28px;
   background-color: #484848;
@@ -55,7 +59,6 @@ a {
   text-align: center;
   font-size: 48px;
 }
-
 .calculated-lost-time{
   text-align: center;
   font-size: 48px;
@@ -81,6 +84,15 @@ a {
   height: 25px;
   background-color: #484848;
   color: white;
+}
+
+dl.bandwidth-bar-chart {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 700px;
+  position: relative;
+  padding: 20px;
 }
 
 .bandwidth {
@@ -164,7 +176,6 @@ a {
   font-size: 14px;
   margin-top: 20px;
 }
-
 /*yellow: #FDB913*/
 /*green: #009296 */
 /*charcoal: #484848 95% transparency */
@@ -210,6 +221,9 @@ border-radius: 5px;*/
 }
 
 .watch-video-row {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
 }
 
 .learn-more-row {
