@@ -21251,7 +21251,7 @@
 	  }, {
 	    key: 'bandwidthSentence',
 	    value: function bandwidthSentence() {
-	      return (0, _classnames2.default)('row', this.videoPlayer());
+	      return (0, _classnames2.default)('row', 'current-bandwidth-sentence', this.videoPlayer());
 	    }
 	  }, {
 	    key: 'videoPlayer',
@@ -21272,28 +21272,51 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'col-xs-12' },
+	        { className: 'container-fluid container-flex' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: this.bandwidthFilter() },
-	          _react2.default.createElement('div', { className: 'col-xs-2' }),
-	          _react2.default.createElement(_bandwidth_selector2.default, null),
-	          _react2.default.createElement('div', { className: 'col-xs-2' })
+	          { className: 'row intro-heading' },
+	          _react2.default.createElement(
+	            'h3',
+	            { className: 'heading' },
+	            'Slow bandwidth impacts digital learning in the classroom.'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'Our children are trying to learn skills for tomorrow with dial-up speeds of the past.'
+	          ),
+	          _react2.default.createElement(
+	            'p',
+	            null,
+	            'Experience what it feels like.'
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
-	          { className: this.bandwidthSentence() },
-	          _react2.default.createElement(_bandwidth_sentence2.default, null)
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: this.videoPlayer(), id: 'video-row' },
-	          _react2.default.createElement(_active_video_player2.default, null)
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: this.killScreen() },
-	          _react2.default.createElement(_kill_screen2.default, { milliseconds: this.props.videoTimer.elapsed })
+	          { className: 'row video-row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.bandwidthFilter() },
+	            _react2.default.createElement('div', { className: 'col-xs-2' }),
+	            _react2.default.createElement(_bandwidth_selector2.default, null),
+	            _react2.default.createElement('div', { className: 'col-xs-2' })
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.bandwidthSentence() },
+	            _react2.default.createElement(_bandwidth_sentence2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.videoPlayer(), id: 'video-row' },
+	            _react2.default.createElement(_active_video_player2.default, null)
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: this.killScreen() },
+	            _react2.default.createElement(_kill_screen2.default, { milliseconds: this.props.videoTimer.elapsed })
+	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
@@ -36091,7 +36114,7 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'video-row watch-video-row col-md-10 col-md-offset-2' },
+	        { className: 'watch-video-row col-md-10 col-md-offset-2' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'current-video-speed-bar' },
@@ -36116,6 +36139,30 @@
 	            width: '800',
 	            height: '420' },
 	          _react2.default.createElement('source', { className: 'mp4', type: 'video/mp4', src: this.props.src })
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'experience-other-speeds' },
+	          _react2.default.createElement(
+	            'p',
+	            { className: 'description' },
+	            'To see how a student might experience bandwidth differently, explore by clicking on the various tiers of bandwidth availability'
+	          ),
+	          _react2.default.createElement(
+	            'dl',
+	            { className: 'bandwidth-bar-chart' },
+	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-50' }),
+	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-40' }),
+	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-30' }),
+	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-20' }),
+	            _react2.default.createElement('dd', { className: 'bandwidth bandwidth-10' })
+	          ),
+	          _react2.default.createElement(
+	            'button',
+	            { id: 'video-play-button', className: 'btn btn-default' },
+	            'Play Now',
+	            _react2.default.createElement('i', { className: 'glyphicon glyphicon-play pull-left' })
+	          )
 	        ),
 	        _react2.default.createElement(_video_timer2.default, null)
 	      );
