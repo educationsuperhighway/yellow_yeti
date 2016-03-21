@@ -68,7 +68,7 @@ function onListening() {
   debug('Listening on ' + bind);
 
   mainWindow.loadURL('http://127.0.0.1:3000');
-  mainWindow.toggleDevTools();
+  //mainWindow.toggleDevTools();
 }
 
 var mainWindow = null;
@@ -85,8 +85,8 @@ app.on('ready', function() {
     webPreferences: {
       nodeIntegration: false
     },
-    width: 1400,
-    height: 1200
+    width: 1200,
+    height: 900
   });
 
   // view engine setup

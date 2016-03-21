@@ -18,3 +18,10 @@ export function setVideoNode(video) {
     type: SET_VIDEO_NODE, video
   }
 }
+
+export const UPDATE_PROGRESS = 'UPDATE_PROGRESS';
+export function updateProgress() {
+  return {
+    type: UPDATE_PROGRESS
+  }
+}

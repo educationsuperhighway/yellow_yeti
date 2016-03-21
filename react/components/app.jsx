@@ -6,28 +6,12 @@ import AvailableViewSelector from '../containers/available_view_selector.jsx';
 import SelectBandwidth from '../containers/bandwidth_selector.jsx';
 import BandwidthSentence from '../containers/bandwidth_sentence.jsx';
 import ActiveVideoPlayer from '../containers/active_video_player.jsx';
-import ActiveVideoInfo from '../containers/active_video_info.jsx';
 
 class App extends Component {
   static propTypes = {
     videoTimer: PropTypes.object.isRequired,
     view: PropTypes.string.isRequired
   };
-
-  componentWillReceiveProps(nextProps) {
-  }
-
-  videoStarted() {
-    return this.props.videoTimer.running && !this.props.videoTimer.ended
-  }
-
-  videoEnded() {
-    return this.props.videoTimer.ended;
-  }
-
-  videoPlaying() {
-    return this.props.videoTimer.running;
-  }
 
   bandwidthFilter() {
     if(this.props.view != 'BANDWIDTH_SELECTOR') {
@@ -53,12 +37,10 @@ class App extends Component {
   }
 
   killScreen() {
-    return classNames("row", 'col-md-8', 'col-md-offset-2', {
+    return classNames('row', {
       hidden: this.props.view != 'KILL_SCREEN'
     });
   }
-
-
 
   render() {
     return (

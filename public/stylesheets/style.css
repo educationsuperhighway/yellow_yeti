@@ -49,8 +49,8 @@ a {
   background-color: #484848;
   color: white;
   opacity: 0.95;
-  width: 800px;
-  height: 410px;
+  width: 100%;
+  min-height: 410px;
   padding: 55px;
   text-align: center;
 }
@@ -69,6 +69,16 @@ a {
 .video-is-playing {
   padding-top: 5px;
 }
+
+video {
+  max-width: 800px;
+  max-height: 420px;
+}
+
+progress {
+  color: #FDB913;
+}
+
 .experience-other-dropdown {
   text-align: right;
 }
@@ -80,7 +90,6 @@ a {
 }
 
 .current-video-speed-bar {
-  width: 800px;
   height: 25px;
   background-color: #484848;
   color: white;
@@ -117,26 +126,6 @@ dl.bandwidth-bar-chart {
   transform: translateY(-50%);
   transition: background-color .3s ease;
   cursor: pointer;
-}
-
-.bandwidth-20:after {
-  width: 20%;
-  content: ""
-}
-.bandwidth-30:after {
-  width: 30%;
-}
-.bandwidth-40:after {
-  width: 40%;
-}
-.bandwidth-50:after {
-  width: 50%;
-}
-.bandwidth-10:after {
-  width: 10%;
-}
-.bandwidth-5:after {
-  width: 5%;
 }
 
 .down-arrow {
@@ -259,7 +248,7 @@ video {
   height: 135px;
   z-index: 1;
   top: 40px;
-  left: 610px;
+  right: 30px;
   padding: 15px;
 }
 

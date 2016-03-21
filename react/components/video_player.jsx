@@ -22,6 +22,7 @@ class VideoPlayer extends Component {
       progress: (() => {}),
       stalled: (() => {}),
       suspend: (() => {}),
+      timeupdate: (() => {}),
       waiting: (() => {})
     }
   };
@@ -39,6 +40,7 @@ class VideoPlayer extends Component {
     video.addEventListener('progress', listeners.progress);
     video.addEventListener('stalled', listeners.stalled);
     video.addEventListener('suspend', listeners.suspend);
+    video.addEventListener('timeupdate', listeners.timeupdate);
     video.addEventListener('waiting', listeners.waiting);
   }
 
@@ -50,9 +52,9 @@ class VideoPlayer extends Component {
 
   render() {
     return (
-      <div className="watch-video-row col-md-8 col-md-offset-2">
+      <div className="watch-video-row col-sm-12 col-md-8 col-md-offset-2">
         <div className="current-video-speed-bar">
-          <p className="video-is-playing col-md-8">
+          <p className="video-is-playing col-sm-12 col-md-8">
             This video is playing at&nbsp;
             <strong>
               <span className='district-bw'>
@@ -61,9 +63,7 @@ class VideoPlayer extends Component {
             </strong>
           </p>
         </div>
-        <video id="video-player"
-               width="800"
-               height="420">
+        <video className="col-sm-12 col-md-8 col-md-offset-2" id="video-player">
           <source className="mp4" type="video/mp4" src={this.props.src}/>
         </video>
         <VideoTimer />

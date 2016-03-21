@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
-import { setVideoNode } from '../actions/video';
+import { setVideoNode, updateProgress } from '../actions/video';
 import { stopTimer } from '../actions/timer';
-import { showKillScreen } from '../actions/view';
+import { setScreen } from '../actions/view';
 import VideoPlayer from '../components/video_player.jsx';
 
 const mapStateToProps = (state) => {
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     videoEvents: {
       ended: () => {
         dispatch(stopTimer());
-        dispatch(showKillScreen());
+        dispatch(setScreen('KILL_SCREEN'));
       },
       loadstart: () => {
       },
@@ -41,6 +41,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       stalled: () => {
       },
       suspend: () => {
+      },
+      timeupdate: () => {
+        dispatch(updateProgress())
       },
       waiting: () => {
       }

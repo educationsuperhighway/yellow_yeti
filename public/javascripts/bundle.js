@@ -21202,10 +21202,6 @@
 
 	var _active_video_player2 = _interopRequireDefault(_active_video_player);
 
-	var _active_video_info = __webpack_require__(309);
-
-	var _active_video_info2 = _interopRequireDefault(_active_video_info);
-
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21224,24 +21220,6 @@
 	  }
 
 	  _createClass(App, [{
-	    key: 'componentWillReceiveProps',
-	    value: function componentWillReceiveProps(nextProps) {}
-	  }, {
-	    key: 'videoStarted',
-	    value: function videoStarted() {
-	      return this.props.videoTimer.running && !this.props.videoTimer.ended;
-	    }
-	  }, {
-	    key: 'videoEnded',
-	    value: function videoEnded() {
-	      return this.props.videoTimer.ended;
-	    }
-	  }, {
-	    key: 'videoPlaying',
-	    value: function videoPlaying() {
-	      return this.props.videoTimer.running;
-	    }
-	  }, {
 	    key: 'bandwidthFilter',
 	    value: function bandwidthFilter() {
 	      if (this.props.view != 'BANDWIDTH_SELECTOR') {
@@ -21270,7 +21248,7 @@
 	  }, {
 	    key: 'killScreen',
 	    value: function killScreen() {
-	      return (0, _classnames2.default)("row", 'col-md-8', 'col-md-offset-2', {
+	      return (0, _classnames2.default)('row', {
 	        hidden: this.props.view != 'KILL_SCREEN'
 	      });
 	    }
@@ -34601,9 +34579,12 @@
 
 	var _bandwidth = __webpack_require__(287);
 
-	function bandwidth() {
-	  var state = arguments.length <= 0 || arguments[0] === undefined ? '' : arguments[0];
-	  var action = arguments[1];
+	var defaultBandwidthOptions = exports.defaultBandwidthOptions = [{ value: 56, text: '56 kbps' }, { value: 100, text: '100 kbps' }, { value: 1000, text: '1 MBps' }, { value: 1000000, text: '1 GBps' }];
+
+	function bandwidth(state, action) {
+	  if (typeof state === 'undefined') {
+	    state = 1000;
+	  }
 
 	  switch (action.type) {
 	    case _bandwidth.SET_BANDWIDTH:
@@ -34612,8 +34593,6 @@
 	      return state;
 	  }
 	}
-
-	var defaultBandwidthOptions = exports.defaultBandwidthOptions = [{ value: 56, text: '56 kbps' }, { value: 100, text: '100 kbps' }, { value: 1000, text: '1 MBps' }, { value: 1000000, text: '1 GBps' }];
 
 	function bandwidthOptions(state) {
 	  if (typeof state === 'undefined') {
@@ -34747,31 +34726,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.showBandwidthSelector = showBandwidthSelector;
-	exports.showVideoPlayer = showVideoPlayer;
-	exports.showKillScreen = showKillScreen;
 	exports.setScreen = setScreen;
-	var SHOW_BANDWIDTH_SELECTOR = exports.SHOW_BANDWIDTH_SELECTOR = 'SHOW_BANDWIDTH_SELECTOR';
-	function showBandwidthSelector() {
-	  return {
-	    type: SHOW_BANDWIDTH_SELECTOR
-	  };
-	}
-
-	var SHOW_VIDEO_PLAYER = exports.SHOW_VIDEO_PLAYER = 'SHOW_VIDEO_PLAYER';
-	function showVideoPlayer() {
-	  return {
-	    type: SHOW_VIDEO_PLAYER
-	  };
-	}
-
-	var SHOW_KILL_SCREEN = exports.SHOW_KILL_SCREEN = 'SHOW_KILL_SCREEN';
-	function showKillScreen() {
-	  return {
-	    type: SHOW_KILL_SCREEN
-	  };
-	}
-
 	var SET_SCREEN = exports.SET_SCREEN = 'SET_SCREEN';
 	function setScreen(screen) {
 	  return {
@@ -34818,7 +34773,7 @@
 	    },
 	    onPlay: function onPlay(bandwidth) {
 	      dispatch((0, _video.setVideoSource)(bandwidth));
-	      dispatch((0, _view.showVideoPlayer)());
+	      dispatch((0, _view.setScreen)('VIDEO_PLAYER'));
 	      dispatch((0, _video.playVideo)());
 	      dispatch((0, _timer.initializeTimer)(100));
 	    }
@@ -34841,6 +34796,7 @@
 	exports.setVideoSource = setVideoSource;
 	exports.playVideo = playVideo;
 	exports.setVideoNode = setVideoNode;
+	exports.updateProgress = updateProgress;
 	var SET_VIDEO_SOURCE = exports.SET_VIDEO_SOURCE = 'SET_VIDEO_SOURCE';
 	function setVideoSource(bandwidth) {
 	  return {
@@ -34859,6 +34815,13 @@
 	function setVideoNode(video) {
 	  return {
 	    type: SET_VIDEO_NODE, video: video
+	  };
+	}
+
+	var UPDATE_PROGRESS = exports.UPDATE_PROGRESS = 'UPDATE_PROGRESS';
+	function updateProgress() {
+	  return {
+	    type: UPDATE_PROGRESS
 	  };
 	}
 
@@ -36022,7 +35985,7 @@
 	    videoEvents: {
 	      ended: function ended() {
 	        dispatch((0, _timer.stopTimer)());
-	        dispatch((0, _view.showKillScreen)());
+	        dispatch((0, _view.setScreen)('KILL_SCREEN'));
 	      },
 	      loadstart: function loadstart() {},
 	      loadeddata: function loadeddata() {},
@@ -36033,6 +35996,9 @@
 	      progress: function progress() {},
 	      stalled: function stalled() {},
 	      suspend: function suspend() {},
+	      timeupdate: function timeupdate() {
+	        dispatch((0, _video.updateProgress)());
+	      },
 	      waiting: function waiting() {}
 	    }
 	  };
@@ -36096,6 +36062,7 @@
 	      video.addEventListener('progress', listeners.progress);
 	      video.addEventListener('stalled', listeners.stalled);
 	      video.addEventListener('suspend', listeners.suspend);
+	      video.addEventListener('timeupdate', listeners.timeupdate);
 	      video.addEventListener('waiting', listeners.waiting);
 	    }
 	  }, {
@@ -36110,13 +36077,13 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'div',
-	        { className: 'watch-video-row col-md-8 col-md-offset-2' },
+	        { className: 'watch-video-row col-sm-12 col-md-8 col-md-offset-2' },
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'current-video-speed-bar' },
 	          _react2.default.createElement(
 	            'p',
-	            { className: 'video-is-playing col-md-8' },
+	            { className: 'video-is-playing col-sm-12 col-md-8' },
 	            'This video is playing at ',
 	            _react2.default.createElement(
 	              'strong',
@@ -36131,9 +36098,7 @@
 	        ),
 	        _react2.default.createElement(
 	          'video',
-	          { id: 'video-player',
-	            width: '800',
-	            height: '420' },
+	          { className: 'col-sm-12 col-md-8 col-md-offset-2', id: 'video-player' },
 	          _react2.default.createElement('source', { className: 'mp4', type: 'video/mp4', src: this.props.src })
 	        ),
 	        _react2.default.createElement(_video_timer2.default, null)
@@ -36162,6 +36127,7 @@
 	    progress: function progress() {},
 	    stalled: function stalled() {},
 	    suspend: function suspend() {},
+	    timeupdate: function timeupdate() {},
 	    waiting: function waiting() {}
 	  }
 	};
@@ -36216,6 +36182,10 @@
 
 	var _utils = __webpack_require__(185);
 
+	var _video_progress = __webpack_require__(309);
+
+	var _video_progress2 = _interopRequireDefault(_video_progress);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36248,6 +36218,11 @@
 	        ),
 	        _react2.default.createElement(
 	          'p',
+	          null,
+	          _react2.default.createElement(_video_progress2.default, null)
+	        ),
+	        _react2.default.createElement(
+	          'p',
 	          { className: 'timer' },
 	          (0, _utils.formatTime)(this.props.milliseconds)
 	        )
@@ -36275,27 +36250,34 @@
 
 	var _reactRedux = __webpack_require__(160);
 
-	var _video_info = __webpack_require__(310);
+	var _progress = __webpack_require__(310);
 
-	var _video_info2 = _interopRequireDefault(_video_info);
+	var _progress2 = _interopRequireDefault(_progress);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function percent(video) {
+	  if (!video || !video.duration || !video.currentTime) {
+	    return 0;
+	  }
+	  return Math.floor(100 / video.duration * video.currentTime);
+	}
+
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return {
-	    video: state.video
+	    percent: percent(state.video)
 	  };
 	};
 
-	var ActiveVideoInfo = (0, _reactRedux.connect)(mapStateToProps)(_video_info2.default);
+	var VideoProgress = (0, _reactRedux.connect)(mapStateToProps)(_progress2.default);
 
-	exports.default = ActiveVideoInfo;
+	exports.default = VideoProgress;
 
 /***/ },
 /* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
@@ -36307,6 +36289,8 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _utils = __webpack_require__(185);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -36315,70 +36299,38 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var VideoInfo = function (_Component) {
-	  _inherits(VideoInfo, _Component);
+	var Progress = function (_Component) {
+	  _inherits(Progress, _Component);
 
-	  function VideoInfo() {
-	    _classCallCheck(this, VideoInfo);
+	  function Progress() {
+	    _classCallCheck(this, Progress);
 
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(VideoInfo).apply(this, arguments));
+	    return _possibleConstructorReturn(this, Object.getPrototypeOf(Progress).apply(this, arguments));
 	  }
 
-	  _createClass(VideoInfo, [{
-	    key: "videoProps",
-	    value: function videoProps() {
-	      return ["audioTracks", "autoplay", "buffered", "controller", "controls", "crossOrigin", "currentSrc", "currentTime", "defaultMuted", "defaultPlaybackRate", "duration", "ended", "error", "loop", "mediaGroup", "muted", "networkState", "paused", "playbackRate", "played", "preload", "readyState", "seekable", "seeking", "src", "startDate", "textTracks", "videoTracks", "volume"];
-	    }
-	  }, {
-	    key: "getVal",
-	    value: function getVal(propName) {
-	      if (typeof this.props.video !== 'undefined') {
-	        return this.props.video[propName];
-	      }
-	    }
-	  }, {
-	    key: "render",
+	  _createClass(Progress, [{
+	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
-
 	      return _react2.default.createElement(
-	        "div",
-	        { className: "table-responsive" },
+	        'progress',
+	        { max: '100', value: this.props.percent },
 	        _react2.default.createElement(
-	          "table",
-	          { className: "table table-striped" },
-	          _react2.default.createElement(
-	            "tbody",
-	            null,
-	            this.videoProps().map(function (key) {
-	              return _react2.default.createElement(
-	                "tr",
-	                { key: key },
-	                _react2.default.createElement(
-	                  "th",
-	                  null,
-	                  key
-	                ),
-	                _react2.default.createElement(
-	                  "td",
-	                  null,
-	                  JSON.stringify(_this2.getVal(key))
-	                )
-	              );
-	            })
-	          )
-	        )
+	          'span',
+	          null,
+	          this.props.percent
+	        ),
+	        '% played'
 	      );
 	    }
 	  }]);
 
-	  return VideoInfo;
+	  return Progress;
 	}(_react.Component);
 
-	VideoInfo.propTypes = {
-	  video: _react.PropTypes.instanceOf(HTMLVideoElement)
+	Progress.propTypes = {
+	  percent: _react.PropTypes.number
 	};
-	exports.default = VideoInfo;
+	exports.default = Progress;
 
 /***/ },
 /* 311 */
@@ -36428,7 +36380,7 @@
 	}
 
 	var logger = (0, _reduxLogger2.default)();
-	var dataStore = (0, _redux.createStore)(bandwidthApp, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxPromise2.default, logger));
+	var dataStore = (0, _redux.createStore)(bandwidthApp, (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxPromise2.default));
 
 	exports.default = dataStore;
 
@@ -36802,18 +36754,6 @@
 	  }
 
 	  switch (action.type) {
-	    case _view.SHOW_VIDEO_PLAYER:
-	      return Object.assign({}, state, {
-	        current: 'VIDEO_PLAYER'
-	      });
-	    case _view.SHOW_KILL_SCREEN:
-	      return Object.assign({}, state, {
-	        current: 'KILL_SCREEN'
-	      });
-	    case _view.SHOW_BANDWIDTH_SELECTOR:
-	      return Object.assign({}, state, {
-	        current: 'BANDWIDTH_SELECTOR'
-	      });
 	    case _view.SET_SCREEN:
 	      return Object.assign({}, state, {
 	        current: action.screen
