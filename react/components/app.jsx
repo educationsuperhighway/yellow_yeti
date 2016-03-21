@@ -1,5 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
+
+import KillScreen from '../components/kill_screen.jsx';
+import AvailableViewSelector from '../containers/available_view_selector.jsx';
 import SelectBandwidth from '../containers/bandwidth_selector.jsx';
 import BandwidthSentence from '../containers/bandwidth_sentence.jsx';
 import ActiveVideoPlayer from '../containers/active_video_player.jsx';
@@ -7,8 +10,12 @@ import ActiveVideoInfo from '../containers/active_video_info.jsx';
 
 class App extends Component {
   static propTypes = {
-    videoTimer: PropTypes.object.isRequired
+    videoTimer: PropTypes.object.isRequired,
+    view: PropTypes.string.isRequired
   };
+
+  componentWillReceiveProps(nextProps) {
+  }
 
   videoStarted() {
     return this.props.videoTimer.running && !this.props.videoTimer.ended
@@ -24,14 +31,24 @@ class App extends Component {
 
   bandwidthFilter() {
     return classNames("bandwidth-filter", "row", {
-      hidden: this.videoPlaying() || this.videoEnded()
+      hidden: this.props.view != 'BANDWIDTH_SELECTOR'
     });
   }
 
-  videoRow() {
+  bandwidthSentence() {
+    return classNames('row', this.videoPlayer())
+  }
+
+  videoPlayer() {
+    return classNames('row', {
+      hidden: this.props.view != 'VIDEO_PLAYER'
+    });
+  }
+
+  killScreen() {
     return classNames("row", {
-      hidden: !(this.videoPlaying() || this.videoEnded())
-    })
+      hidden: this.props.view != 'KILL_SCREEN'
+    });
   }
 
   render() {
@@ -42,11 +59,17 @@ class App extends Component {
           <SelectBandwidth />
           <div className="col-xs-2"></div>
         </div>
-        <div className={this.videoRow()}>
+        <div className={this.bandwidthSentence()}>
           <BandwidthSentence />
         </div>
-        <div className={this.videoRow()} id="video-row">
+        <div className={this.videoPlayer()} id="video-row">
           <ActiveVideoPlayer />
+        </div>
+        <div className={this.killScreen()}>
+          <KillScreen milliseconds={this.props.videoTimer.elapsed} />
+        </div>
+        <div className="sticky-top">
+          <AvailableViewSelector />
         </div>
       </div>
     )

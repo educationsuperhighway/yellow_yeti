@@ -4,7 +4,7 @@
   "description": "School bandwidth simulator",
   "main": "index.js",
   "scripts": {
-    "start": "electron .",
+    "start": "webpack && electron .",
     "test": "mocha ./spec/react/**/*_spec.js --compilers js:babel-core/register --require ./spec/react/setup.js"
   },
   "repository": {

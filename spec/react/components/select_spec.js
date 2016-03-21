@@ -23,6 +23,6 @@ describe("<Select/>", () => {
       { value: '100', text: '100 kb/s' }
     ];
     let wrapper = deep(opts);
-    expect(wrapper.find('option').length).to.equal(2);
+    expect(wrapper.find('option').length).to.equal(3);
   });
 });

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { setBandwidth } from '../actions/bandwidth.js';
 import { setVideoSource, playVideo } from '../actions/video.js';
+import { showVideoPlayer } from '../actions/view.js';
 import { initializeTimer } from '../actions/timer.js';
 import Select from '../components/select.jsx';
 
@@ -17,6 +18,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     },
     onPlay: (bandwidth) => {
       dispatch(setVideoSource(bandwidth));
+      dispatch(showVideoPlayer());
       dispatch(playVideo());
       dispatch(initializeTimer(100));
     }

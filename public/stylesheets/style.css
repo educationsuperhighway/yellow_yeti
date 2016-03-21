@@ -18,9 +18,6 @@ a {
 }
 
 .container-flex {
-  display: flex;
-  justify-content: center;
-  flex-flow: column nowrap;
 }
 
 .intro-heading {
@@ -43,7 +40,6 @@ a {
 }
 
 .kill-screen {
-  display: none;
   font-family: "Lato" !important;
   font-size: 28px;
   background-color: #484848;
@@ -59,6 +55,7 @@ a {
   text-align: center;
   font-size: 48px;
 }
+
 .calculated-lost-time{
   text-align: center;
   font-size: 48px;
@@ -84,15 +81,6 @@ a {
   height: 25px;
   background-color: #484848;
   color: white;
-}
-
-dl.bandwidth-bar-chart {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 700px;
-  position: relative;
-  padding: 20px;
 }
 
 .bandwidth {
@@ -176,6 +164,7 @@ dl.bandwidth-bar-chart {
   font-size: 14px;
   margin-top: 20px;
 }
+
 /*yellow: #FDB913*/
 /*green: #009296 */
 /*charcoal: #484848 95% transparency */
@@ -220,15 +209,10 @@ border-radius: 5px;*/
   margin-left: 205px;
 }
 
-.toggle-video { display: none; }
 .watch-video-row {
-  display: flex;
-  flex-flow: column nowrap;
-  justify-content: center;
 }
 
 .learn-more-row {
-  display: none;
   background-color: #9B9B9B;
   text-align: center;
   vertical-align: middle;
@@ -268,4 +252,12 @@ video {
 .timer {
   font-size: 32px;
   text-align: center;
+}
+
+.sticky-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 40px;
 }

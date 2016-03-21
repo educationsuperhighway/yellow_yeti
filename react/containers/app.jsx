@@ -3,7 +3,8 @@ import App from '../components/app.jsx';
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    videoTimer: state.videoTimer
+    videoTimer: state.videoTimer,
+    view: state.view.current
   }
 };
 

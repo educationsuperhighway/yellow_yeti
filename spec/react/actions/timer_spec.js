@@ -81,22 +81,6 @@ describe('initializeTimer', () => {
         assert(dispatch.calledWith(updateTimer()));
       });
     });
-
-    describe('when the timer has been stopped', () => {
-      let state, getState;
-
-      before(() => {
-        let prevTimer = timer(undefined, startTimer());
-        state = { videoTimer: timer(prevTimer, stopTimer()) };
-        getState = () => { return state; };
-      });
-
-      it('dispatches a STOP_TIMER action', () => {
-        fn(dispatch, getState);
-        clock.tick(interval);
-        assert(dispatch.calledWith(stopTimer()));
-      });
-    });
   });
 });
 

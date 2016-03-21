@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { setVideoNode } from '../actions/video';
 import { stopTimer } from '../actions/timer';
+import { showKillScreen } from '../actions/view';
 import VideoPlayer from '../components/video_player.jsx';
 
 const mapStateToProps = (state) => {
@@ -8,7 +9,8 @@ const mapStateToProps = (state) => {
     return {}
   }
   return {
-    src: state.video.src
+    src: state.video.src,
+    speed: Number(state.bandwidth)
   }
 };
 
@@ -20,37 +22,27 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     videoEvents: {
       ended: () => {
         dispatch(stopTimer());
-        console.log('ended');
+        dispatch(showKillScreen());
       },
       loadstart: () => {
-        console.log('loadstart');
       },
-      loadeddata: (trust, e) => {
-        console.log('loadeddata', JSON.stringify(e));
+      loadeddata: () => {
       },
-      loadedmetadata: (trust, e) => {
-        console.log('loadedmetadata', JSON.stringify(e));
+      loadedmetadata: () => {
       },
       canplay: () => {
-        console.log('canplay');
       },
       play: () => {
-        console.log('play');
       },
       playing: () => {
-        console.log('playing');
       },
-      progress: (trust, e) => {
-        console.log('progress', JSON.stringify(e));
+      progress: () => {
       },
       stalled: () => {
-        console.log('stalled');
       },
       suspend: () => {
-        console.log('suspend');
       },
       waiting: () => {
-        console.log('waiting');
       }
     }
   }

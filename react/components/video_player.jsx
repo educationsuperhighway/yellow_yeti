@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import { formatBandwidth } from '../utils.js';
 import VideoTimer from '../containers/video_timer.jsx';
 
 class VideoPlayer extends Component {
@@ -52,9 +53,12 @@ class VideoPlayer extends Component {
       <div className="video-row watch-video-row col-md-10 col-md-offset-2">
         <div className="current-video-speed-bar">
           <p className="video-is-playing col-md-8">
-            This video is playing at <strong>
-            <span className='district-bw'>{this.props.speed}</span>
-            kbps/student</strong>
+            This video is playing at&nbsp;
+            <strong>
+              <span className='district-bw'>
+                {formatBandwidth(this.props.speed)}
+              </span>
+            </strong>
           </p>
         </div>
         <video id="video-player"

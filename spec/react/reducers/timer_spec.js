@@ -4,10 +4,10 @@ import sinon from 'sinon';
 import {
   startTimer,
   updateTimer,
-  stopTimer
+  stopTimer,
 } from '../../../react/actions/timer.js';
 
-import { timer } from '../../../react/reducers/timer.js';
+import { timer, timerDefaults } from '../../../react/reducers/timer.js';
 
 
 describe('timer reducer function', () => {
@@ -88,9 +88,9 @@ describe('timer reducer function', () => {
 
   describe('given any other action', () => {
     it('returns the state', () => {
-      let state = 'existing state';
+      let state = { name: 'existing state' };
       let action = { type: 'ANY_OTHER_ACTION' };
-      expect(timer(state, action)).to.equal(state);
+      expect(timer(state, action)).to.deep.equal(state);
     });
   });
 });
