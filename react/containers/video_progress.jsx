@@ -8,7 +8,8 @@ function percent(video) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    percent: percent(state.video)
+    percent: percent(state.video),
+    status: state.videoStatus
   }
 };
 

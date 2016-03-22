@@ -46,24 +46,28 @@ class App extends Component {
     return (
       <div className="container-fluid container-flex">
         <div className="row intro-heading">
-          <h3 className="heading">
-            Slow bandwidth impacts digital learning in the classroom.
-          </h3>
-          <p>
-            Our children are trying to learn skills for tomorrow with dial-up
-            speeds of the past.
-          </p>
-          <p>
-            Experience what it feels like.
-          </p>
+          <div className="col-md-8 col-md-push-2">
+            <h3 className="heading">
+              Slow bandwidth impacts digital learning in the classroom.
+            </h3>
+            <p>
+              Our children are trying to learn skills for tomorrow with dial-up
+              speeds of the past.
+            </p>
+            <p>
+              Experience what it feels like.
+            </p>
+          </div>
         </div>
         <div className="row video-row">
-          {this.bandwidthFilter()}
-          <div className={this.videoPlayer()} id="video-row">
-            <ActiveVideoPlayer />
-          </div>
-          <div className={this.killScreen()}>
-            <KillScreenContainer milliseconds={this.props.videoTimer.elapsed} />
+          <div className="col-xs-12">
+            {this.bandwidthFilter()}
+            <div className={this.videoPlayer()} id="video-row">
+              <ActiveVideoPlayer />
+            </div>
+            <div className={this.killScreen()}>
+              <KillScreenContainer milliseconds={this.props.videoTimer.elapsed} />
+            </div>
           </div>
         </div>
       </div>

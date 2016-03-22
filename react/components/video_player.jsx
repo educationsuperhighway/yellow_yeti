@@ -53,7 +53,7 @@ class VideoPlayer extends Component {
   render() {
     return (
       <div className="watch-video-row col-sm-12 col-md-8 col-md-offset-2">
-        <div className="current-video-speed-bar">
+        <div className="current-video-speed-bar row">
           <p className="video-is-playing col-sm-12 col-md-8">
             This video is playing at&nbsp;
             <strong>

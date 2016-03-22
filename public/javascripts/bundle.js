@@ -21262,34 +21262,42 @@
 	          'div',
 	          { className: 'row intro-heading' },
 	          _react2.default.createElement(
-	            'h3',
-	            { className: 'heading' },
-	            'Slow bandwidth impacts digital learning in the classroom.'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'Our children are trying to learn skills for tomorrow with dial-up speeds of the past.'
-	          ),
-	          _react2.default.createElement(
-	            'p',
-	            null,
-	            'Experience what it feels like.'
+	            'div',
+	            { className: 'col-md-8 col-md-push-2' },
+	            _react2.default.createElement(
+	              'h3',
+	              { className: 'heading' },
+	              'Slow bandwidth impacts digital learning in the classroom.'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'Our children are trying to learn skills for tomorrow with dial-up speeds of the past.'
+	            ),
+	            _react2.default.createElement(
+	              'p',
+	              null,
+	              'Experience what it feels like.'
+	            )
 	          )
 	        ),
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'row video-row' },
-	          this.bandwidthFilter(),
 	          _react2.default.createElement(
 	            'div',
-	            { className: this.videoPlayer(), id: 'video-row' },
-	            _react2.default.createElement(_active_video_player2.default, null)
-	          ),
-	          _react2.default.createElement(
-	            'div',
-	            { className: this.killScreen() },
-	            _react2.default.createElement(_kill_screen2.default, { milliseconds: this.props.videoTimer.elapsed })
+	            { className: 'col-xs-12' },
+	            this.bandwidthFilter(),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.videoPlayer(), id: 'video-row' },
+	              _react2.default.createElement(_active_video_player2.default, null)
+	            ),
+	            _react2.default.createElement(
+	              'div',
+	              { className: this.killScreen() },
+	              _react2.default.createElement(_kill_screen2.default, { milliseconds: this.props.videoTimer.elapsed })
+	            )
 	          )
 	        )
 	      );
@@ -34840,6 +34848,7 @@
 	exports.playVideo = playVideo;
 	exports.setVideoNode = setVideoNode;
 	exports.updateProgress = updateProgress;
+	exports.updateVideoStatus = updateVideoStatus;
 	var SET_VIDEO_SOURCE = exports.SET_VIDEO_SOURCE = 'SET_VIDEO_SOURCE';
 	function setVideoSource(bandwidth) {
 	  return {
@@ -34865,6 +34874,13 @@
 	function updateProgress() {
 	  return {
 	    type: UPDATE_PROGRESS
+	  };
+	}
+
+	var UPDATE_VIDEO_STATUS = exports.UPDATE_VIDEO_STATUS = 'UPDATE_VIDEO_STATUS';
+	function updateVideoStatus(status) {
+	  return {
+	    type: UPDATE_VIDEO_STATUS, status: status
 	  };
 	}
 
@@ -36029,15 +36045,22 @@
 	      ended: function ended() {
 	        dispatch((0, _timer.stopTimer)());
 	        dispatch((0, _view.setScreen)('KILL_SCREEN'));
+	        dispatch((0, _video.updateVideoStatus)('ended'));
 	      },
-	      loadstart: function loadstart() {},
+	      loadstart: function loadstart() {
+	        dispatch((0, _video.updateVideoStatus)('loading'));
+	      },
 	      loadeddata: function loadeddata() {},
 	      loadedmetadata: function loadedmetadata() {},
 	      canplay: function canplay() {},
 	      play: function play() {},
-	      playing: function playing() {},
+	      playing: function playing() {
+	        dispatch((0, _video.updateVideoStatus)('playing'));
+	      },
 	      progress: function progress() {},
-	      stalled: function stalled() {},
+	      stalled: function stalled() {
+	        dispatch((0, _video.updateVideoStatus)('stalled'));
+	      },
 	      suspend: function suspend() {},
 	      timeupdate: function timeupdate() {
 	        dispatch((0, _video.updateProgress)());
@@ -36123,7 +36146,7 @@
 	        { className: 'watch-video-row col-sm-12 col-md-8 col-md-offset-2' },
 	        _react2.default.createElement(
 	          'div',
-	          { className: 'current-video-speed-bar' },
+	          { className: 'current-video-speed-bar row' },
 	          _react2.default.createElement(
 	            'p',
 	            { className: 'video-is-playing col-sm-12 col-md-8' },
@@ -36308,7 +36331,8 @@
 
 	var mapStateToProps = function mapStateToProps(state, ownProps) {
 	  return {
-	    percent: percent(state.video)
+	    percent: percent(state.video),
+	    status: state.videoStatus
 	  };
 	};
 
@@ -36356,7 +36380,9 @@
 	    value: function render() {
 	      return _react2.default.createElement(
 	        'progress',
-	        { max: '100', value: this.props.percent },
+	        { max: '100',
+	          className: this.props.status,
+	          value: this.props.percent },
 	        _react2.default.createElement(
 	          'span',
 	          null,
@@ -36371,7 +36397,8 @@
 	}(_react.Component);
 
 	Progress.propTypes = {
-	  percent: _react.PropTypes.number
+	  percent: _react.PropTypes.number,
+	  status: _react.PropTypes.string
 	};
 	exports.default = Progress;
 
@@ -36407,6 +36434,8 @@
 
 	var _view = __webpack_require__(317);
 
+	var _video_status = __webpack_require__(318);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function bandwidthApp() {
@@ -36418,7 +36447,8 @@
 	    bandwidth: (0, _bandwidth.bandwidth)(state.bandwidth, action),
 	    video: (0, _video.video)(state.video, action),
 	    videoTimer: (0, _timer.timer)(state.videoTimer, action),
-	    view: (0, _view.view)(state.view, action)
+	    view: (0, _view.view)(state.view, action),
+	    videoStatus: (0, _video_status.videoStatus)(state.videoStatus, action)
 	  };
 	}
 
@@ -36805,6 +36835,30 @@
 	      return state;
 	  }
 	}
+
+/***/ },
+/* 318 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.videoStatus = videoStatus;
+
+	var _video = __webpack_require__(293);
+
+	function videoStatus(state, action) {
+	  switch (action.type) {
+	    case _video.UPDATE_VIDEO_STATUS:
+	      return action.status;
+	    default:
+	      return state;
+	  }
+	}
+
+	exports.default = videoStatus;
 
 /***/ }
 /******/ ]);

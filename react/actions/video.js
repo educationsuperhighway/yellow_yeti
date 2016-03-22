@@ -25,3 +25,10 @@ export function updateProgress() {
     type: UPDATE_PROGRESS
   }
 }
+
+export const UPDATE_VIDEO_STATUS = 'UPDATE_VIDEO_STATUS';
+export function updateVideoStatus(status) {
+  return {
+    type: UPDATE_VIDEO_STATUS, status
+  }
+}
