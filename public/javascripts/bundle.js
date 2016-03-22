@@ -21222,9 +21222,6 @@
 	  _createClass(App, [{
 	    key: 'bandwidthFilter',
 	    value: function bandwidthFilter() {
-	      if (this.props.view != 'BANDWIDTH_SELECTOR') {
-	        return _react2.default.createElement('div', null);
-	      }
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'bandwidth-filter row' },
@@ -21291,11 +21288,6 @@
 	            { className: this.killScreen() },
 	            _react2.default.createElement(_kill_screen2.default, { milliseconds: this.props.videoTimer.elapsed })
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'sticky-top' },
-	          _react2.default.createElement(_available_view_selector2.default, null)
 	        )
 	      );
 	    }

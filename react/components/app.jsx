@@ -14,9 +14,6 @@ class App extends Component {
   };
 
   bandwidthFilter() {
-    if(this.props.view != 'BANDWIDTH_SELECTOR') {
-      return (<div></div>)
-    }
     return (
       <div className='bandwidth-filter row'>
         <div className="col-md-2"></div>
@@ -65,9 +62,6 @@ class App extends Component {
           <div className={this.killScreen()}>
             <KillScreen milliseconds={this.props.videoTimer.elapsed} />
           </div>
-        </div>
-        <div className="sticky-top">
-          <AvailableViewSelector />
         </div>
       </div>
     )
