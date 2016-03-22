@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames';
 
-import KillScreen from '../components/kill_screen.jsx';
+import KillScreenContainer from '../containers/kill_screen.jsx';
 import AvailableViewSelector from '../containers/available_view_selector.jsx';
 import SelectBandwidth from '../containers/bandwidth_selector.jsx';
 import BandwidthSentence from '../containers/bandwidth_sentence.jsx';
@@ -14,6 +14,9 @@ class App extends Component {
   };
 
   bandwidthFilter() {
+    if(this.props.view != 'BANDWIDTH_SELECTOR') {
+      return (<div></div>)
+    }
     return (
       <div className='bandwidth-filter row'>
         <div className="col-md-2"></div>
@@ -60,7 +63,7 @@ class App extends Component {
             <ActiveVideoPlayer />
           </div>
           <div className={this.killScreen()}>
-            <KillScreen milliseconds={this.props.videoTimer.elapsed} />
+            <KillScreenContainer milliseconds={this.props.videoTimer.elapsed} />
           </div>
         </div>
       </div>

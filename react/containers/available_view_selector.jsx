@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import ViewSelector from '../components/view_selector.jsx';
 import { setScreen } from '../actions/view.js';
+import ViewSelector from '../components/view_selector.jsx';
 
 const mapStateToProps = (state, ownProps) => {
   return {
